@@ -21,8 +21,12 @@ import ch.wiss.m295.lb_projekt.repository.TeamRepository;
 @RequestMapping("/spielplan")
 public class SpielplanController {
 
+    private final TeamRepository teamRepository;
+
     @Autowired
-    private TeamRepository teamRepository;
+    public SpielplanController(TeamRepository teamRepository) {
+        this.teamRepository = teamRepository;
+    }
 
     @GetMapping("/{ligaId}")
     public ResponseEntity<List<Map<String, Object>>> getSpielplan(@PathVariable int ligaId) {

@@ -4,6 +4,7 @@ import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Spieler {
     @NotEmpty(message = "Der Spieler muss einen Namen haben.")
     private String name;
 
-    // @Min(value = 18, message = "Der Spieler muss mindestens 18 Jahre alt sein")
+    @Min(value = 18, message = "Der Spieler muss mindestens 18 Jahre alt sein")
     private int age;
 
     @NotEmpty(message = "Der Spiler muss eine Spielposition haben")
@@ -38,6 +39,7 @@ public class Spieler {
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "team_id", nullable = false)
+    @Nonnull
     private Team team;
 
     // Getter und Setter
