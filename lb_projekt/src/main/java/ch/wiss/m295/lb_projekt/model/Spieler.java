@@ -29,8 +29,8 @@ public class Spieler {
     @NotEmpty(message = "Der Spieler muss einen Namen haben.")
     private String name;
 
-    @Min(value = 18, message = "Der Spieler muss mindestens 18 Jahre alt sein")
-    private int alter;
+    // @Min(value = 18, message = "Der Spieler muss mindestens 18 Jahre alt sein")
+    private int age;
 
     @NotEmpty(message = "Der Spiler muss eine Spielposition haben")
     private String position;
@@ -57,12 +57,12 @@ public class Spieler {
         this.name = name;
     }
 
-    public int getAlter() {
-        return alter;
+    public int getAge() {
+        return age;
     }
 
-    public void setAlter(int alter) {
-        this.alter = alter;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getPosition() {

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,6 +52,18 @@ public class LigaController {
     }
 
     // Eine bestehende Liga anpassen
+    @PutMapping("/{id}")
+    public ResponseEntity<Liga> updateLiga(@PathVariable long id, @Valid @RequestBody Liga updatedLiga) {
+        return ligaRepository.findById(id)
+                .map(liga -> {
+                    liga.setName(updatedLiga.getName());
+                    liga.setLand(updatedLiga.getLand());
+                    logger.info("Aktualisiere Liga mit ID {}: {}", id, liga);
+                    Liga savedLiga = ligaRepository.save(liga);
+                    return ResponseEntity.ok(savedLiga);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
     // Eine bestehende Liga löschen
     @DeleteMapping("/{id}")

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,8 +35,14 @@ public class TeamController {
 
     // Alle Teams abfragen
     @GetMapping("/")
-    public ResponseEntity<Iterable<Team>> getTeams() {
-        return ResponseEntity.ok().body(teamRepository.findAll());
+    public ResponseEntity<?> getTeams() {
+        try {
+            Iterable<Team> teams = teamRepository.findAll();
+            return ResponseEntity.ok().body(teams);
+        } catch (Exception e) {
+            logger.error("Error fetching teams: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error fetching teams");
+        }
     }
 
     // Eine bestimmtes Team abfragen mit der ID
@@ -58,6 +65,29 @@ public class TeamController {
     }
 
     // Eine bestehendes Team anpassen
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateTeam(@PathVariable long id, @Valid @RequestBody Team updatedTeam) {
+        try {
+            // Fetch the existing team
+            Team existingTeam = teamRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Team not found with id " + id));
+
+            // Update fields
+            existingTeam.setName(updatedTeam.getName());
+            existingTeam.setAustragungsort(updatedTeam.getAustragungsort());
+            existingTeam.setLiga(updatedTeam.getLiga()); // assuming Liga is correctly set in the updatedTeam
+
+            // Save the updated team
+            Team savedTeam = teamRepository.save(existingTeam);
+            return ResponseEntity.ok().body(savedTeam);
+        } catch (RuntimeException e) {
+            logger.error("Error updating team: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            logger.error("Error updating team: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating team");
+        }
+    }
 
     // Eine bestehendes Team löschen
     @DeleteMapping("/{id}")

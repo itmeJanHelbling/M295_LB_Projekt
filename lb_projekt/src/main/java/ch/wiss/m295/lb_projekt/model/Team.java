@@ -37,13 +37,13 @@ public class Team {
     @NotEmpty(message = "Das Team muss einen Austragungsort haben.")
     private String austragungsort;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "liga_id", nullable = false)
     @Nonnull
     private Liga liga;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Spieler> spieler;
 
     // Konstruktor für "OneToMany Beziehung"

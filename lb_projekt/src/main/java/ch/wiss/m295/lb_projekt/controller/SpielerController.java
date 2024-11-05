@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,14 +29,13 @@ public class SpielerController {
 
     // Repository Objekt mit Konstruktor nach SonarLint vorgabe
     private final SpielerRepository spielerRepository;
+    private final TeamRepository teamRepository;
 
     @Autowired
-    public SpielerController(SpielerRepository spielerRepository) {
+    public SpielerController(SpielerRepository spielerRepository, TeamRepository teamRepository) {
         this.spielerRepository = spielerRepository;
+        this.teamRepository = teamRepository;
     }
-
-    @Autowired
-    TeamRepository teamRepository;
 
     // Alle Spieler abfragen
     @GetMapping("/")
@@ -69,6 +69,30 @@ public class SpielerController {
     }
 
     // Ein bestehenden Spieler anpassen
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateSpieler(@PathVariable long id, @Valid @RequestBody Spieler updatedSpieler) {
+        try {
+            // Fetch the existing team
+            Spieler existingSpieler = spielerRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Spieler not found with id " + id));
+
+            // Update fields
+            existingSpieler.setName(updatedSpieler.getName());
+            existingSpieler.setAge(updatedSpieler.getAge());
+            existingSpieler.setPosition(updatedSpieler.getPosition());
+            existingSpieler.setTeam(updatedSpieler.getTeam());
+
+            // Save the updated team
+            Spieler savedSpieler = spielerRepository.save(existingSpieler);
+            return ResponseEntity.ok().body(savedSpieler);
+        } catch (RuntimeException e) {
+            logger.error("Error updating spieler: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            logger.error("Error updating spieler: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating spieler");
+        }
+    }
 
     // Ein bestehenden Spieler löschen
     @DeleteMapping("/{id}")
