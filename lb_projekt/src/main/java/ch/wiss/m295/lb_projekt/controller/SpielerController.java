@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.wiss.m295.lb_projekt.exceptions.SpielerCouldNotBeFoundException;
+import ch.wiss.m295.lb_projekt.exceptions.SpielerLoadException;
 import ch.wiss.m295.lb_projekt.model.Spieler;
 import ch.wiss.m295.lb_projekt.model.Team;
 import ch.wiss.m295.lb_projekt.repository.SpielerRepository;
@@ -40,18 +42,25 @@ public class SpielerController {
     // Alle Spieler abfragen
     @GetMapping("/")
     public ResponseEntity<Iterable<Spieler>> getSpielers() {
-        return ResponseEntity.ok().body(spielerRepository.findAll());
+        Iterable<Spieler> spieler = null;
+        try {
+            spieler = spielerRepository.findAll();
+        } catch (Exception ex) {
+            throw new SpielerLoadException();
+        }
+        return ResponseEntity.ok(spieler);
     }
 
-    // Einen bestimmten Spieler mit der ID abfragen
     @GetMapping("/{id}")
     public ResponseEntity<Spieler> getSpieler(@PathVariable long id) {
-        return ResponseEntity.ok().body(spielerRepository.findById(id).get());
+        Spieler spieler = spielerRepository.findById(id)
+                .orElseThrow(() -> new SpielerCouldNotBeFoundException(id));
+        return ResponseEntity.ok(spieler);
     }
 
     // Eine neuer Spieler erstellen
     @PostMapping("/")
-    public ResponseEntity<?> createSpieler(@Valid @RequestBody Spieler spieler) {
+    public ResponseEntity<Object> createSpieler(@Valid @RequestBody Spieler spieler) {
         try {
             // Verify that the associated Team exists
             Team team = teamRepository.findById(spieler.getTeam().getId())
@@ -70,7 +79,7 @@ public class SpielerController {
 
     // Ein bestehenden Spieler anpassen
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateSpieler(@PathVariable long id, @Valid @RequestBody Spieler updatedSpieler) {
+    public ResponseEntity<Object> updateSpieler(@PathVariable long id, @Valid @RequestBody Spieler updatedSpieler) {
         try {
             // Fetch the existing team
             Spieler existingSpieler = spielerRepository.findById(id)

@@ -3,6 +3,7 @@ package ch.wiss.m295.lb_projekt.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.wiss.m295.lb_projekt.exceptions.LigaCouldNotBeFoundException;
+import ch.wiss.m295.lb_projekt.exceptions.LigaCouldNotBeSavedException;
+import ch.wiss.m295.lb_projekt.exceptions.LigenLoadException;
 import ch.wiss.m295.lb_projekt.model.Liga;
 import ch.wiss.m295.lb_projekt.repository.LigaRepository;
 import jakarta.validation.Valid;
@@ -34,21 +38,37 @@ public class LigaController {
 
     // Alle Ligen abfragen
     @GetMapping("/")
-    public ResponseEntity<Iterable<Liga>> getLigas() {
-        return ResponseEntity.ok().body(ligaRepository.findAll());
+    public ResponseEntity<Iterable<Liga>> getLigen() {
+        Iterable<Liga> ligen = null;
+        try {
+            ligen = ligaRepository.findAll();
+        } catch (Exception ex) {
+            throw new LigenLoadException();
+        }
+        return ResponseEntity.ok(ligen);
     }
 
     // Eine bestimmte Liga abfragen mit der ID
     @GetMapping("/{id}")
     public ResponseEntity<Liga> getLiga(@PathVariable long id) {
-        return ResponseEntity.ok().body(ligaRepository.findById(id).get());
+        Liga liga = ligaRepository.findById(id)
+                .orElseThrow(() -> new LigaCouldNotBeFoundException(id));
+        return ResponseEntity.ok(liga);
     }
 
     // Eine neue Liga erstellen
-    @PostMapping("/") /* RequestBody muss JSON-Objekt mit Liga-Attributen enthalten */
+    @PostMapping("/")
     public ResponseEntity<Liga> createLiga(@Valid @RequestBody Liga liga) {
-        logger.info("Erstelle Liga: {}", liga);
-        return ResponseEntity.ok().body(ligaRepository.save(liga));
+        try {
+            // Save the Liga object to the repository
+            Liga savedLiga = ligaRepository.save(liga);
+
+            // Return a response with status 201 (Created) and the saved Liga in the body
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedLiga);
+        } catch (Exception ex) {
+            // Handle any exceptions and throw a custom exception
+            throw new LigaCouldNotBeSavedException(liga.getName());
+        }
     }
 
     // Eine bestehende Liga anpassen

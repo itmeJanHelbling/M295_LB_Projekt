@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.wiss.m295.lb_projekt.exceptions.TeamCouldNotBeFoundException;
+import ch.wiss.m295.lb_projekt.exceptions.TeamCouldNotBeSavedException;
+import ch.wiss.m295.lb_projekt.exceptions.TeamLoadException;
 import ch.wiss.m295.lb_projekt.model.Team;
 import ch.wiss.m295.lb_projekt.repository.TeamRepository;
 import jakarta.validation.Valid;
@@ -35,38 +38,38 @@ public class TeamController {
 
     // Alle Teams abfragen
     @GetMapping("/")
-    public ResponseEntity<?> getTeams() {
+    public ResponseEntity<Iterable<Team>> getTeams() {
+        Iterable<Team> team = null;
         try {
-            Iterable<Team> teams = teamRepository.findAll();
-            return ResponseEntity.ok().body(teams);
+            team = teamRepository.findAll();
         } catch (Exception e) {
-            logger.error("Error fetching teams: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error fetching teams");
+            throw new TeamLoadException();
         }
+        return ResponseEntity.ok(team);
     }
 
     // Eine bestimmtes Team abfragen mit der ID
     @GetMapping("/{id}")
     public ResponseEntity<Team> getTeam(@PathVariable long id) {
-        return ResponseEntity.ok().body(teamRepository.findById(id).get());
+        Team team = teamRepository.findById(id)
+                .orElseThrow(() -> new TeamCouldNotBeFoundException(id));
+        return ResponseEntity.ok(team);
     }
 
     // Eine neues Team erstellen
     @PostMapping("/")
-    public ResponseEntity<?> createTeam(@Valid @RequestBody Team team) {
+    public ResponseEntity<Team> createTeam(@Valid @RequestBody Team team) {
         try {
-            logger.info("Erstelle Team: {}", team);
             Team savedTeam = teamRepository.save(team);
-            return ResponseEntity.ok().body(savedTeam);
-        } catch (Exception e) {
-            logger.error("Error creating team: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating team");
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedTeam);
+        } catch (Exception ex) {
+            throw new TeamCouldNotBeSavedException(team.getName());
         }
     }
 
     // Eine bestehendes Team anpassen
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateTeam(@PathVariable long id, @Valid @RequestBody Team updatedTeam) {
+    public ResponseEntity<Object> updateTeam(@PathVariable long id, @Valid @RequestBody Team updatedTeam) {
         try {
             // Fetch the existing team
             Team existingTeam = teamRepository.findById(id)

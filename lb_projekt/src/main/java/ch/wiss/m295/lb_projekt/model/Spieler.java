@@ -37,7 +37,7 @@ public class Spieler {
     private String position;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "team_id", nullable = false)
     @Nonnull
     private Team team;
