@@ -37,6 +37,7 @@
     - [Schritt 4: Insomnia einrichten](#schritt-4-insomnia-einrichten)
   - [Hilfestellungen](#hilfestellungen)
   - [Auswertung](#auswertung)
+    - [Reflexion](#reflexion)
   
 
 
@@ -470,3 +471,11 @@ Optional, falls nicht bereits installiert:
 
 
 ## Auswertung
+
+### Reflexion
+
+Mir hat das Modul 295 sehr gut gefallen, auch wenn ich zugeben muss, dass es immer noch sehr viel gibt, das ich nicht verstehe. Es hat mir sehr geholfen, dass wir im Unterricht anhand eines praktischen Beispiels (Wiss_Quizz) unser Wissen erarbeitet haben. Während meines Projekts habe ich immer wieder Lösungsansätze aus den verschiedenen Sidequests übernommen.
+
+Ich glaube, die Model- und Controller-Klassen habe ich gut verstanden, auch wenn die Beziehungen zwischen den Klassen schnell kompliziert werden können und die Wahrscheinlichkeit für Fehler steigt. Bei den Unit Tests und den Exceptions brauche ich noch sehr viel praktische Übung, bis ich mich sicher fühle.
+
+Insgesamt hat mir das Projekt sehr gut gefallen. Vor allem, nachdem alle meine HTTP-Requests funktioniert haben, wusste ich, dass ich auf dem richtigen Weg bin.
