@@ -2,17 +2,42 @@
 
 ## Inhaltsverzeichnis
 
-- [Aufgabenstellung](#aufgabenstellung)
-- [Arbeitsplan](#arbeitsplan)
-- [Projektidee](#projektidee)
-- [User Stories](#user-stories)
-- [Klassendiagramm](#klassendiagramm)
-- [Rest Endpunkte](#rest-endpunkte)
-- [Manuelles Testing](#manuelles-testing)
-- [Arbeitsjournal](#arbeitsjournal)
-- [Installationsanleitung](#installationsanleitung)
-- [Hilfestellungen](#hilfestellungen)
-- [Auswertung](#auswertung)
+- [M295\_LB\_Projekt](#m295_lb_projekt)
+  - [Inhaltsverzeichnis](#inhaltsverzeichnis)
+  - [Aufgabestellung](#aufgabestellung)
+    - [Was brauche ich?](#was-brauche-ich)
+  - [Arbeitsplan](#arbeitsplan)
+  - [Projektidee](#projektidee)
+  - [User Stories](#user-stories)
+    - [User Story 1](#user-story-1)
+    - [User Story 2](#user-story-2)
+    - [User Story 3](#user-story-3)
+    - [User Story 4](#user-story-4)
+  - [Klassendiagram](#klassendiagram)
+  - [Rest Endpunkte](#rest-endpunkte)
+  - [Manuelles Testing](#manuelles-testing)
+    - [Testkonzept](#testkonzept)
+      - [Was ist mein Ziel?](#was-ist-mein-ziel)
+      - [Wie wird getest ?](#wie-wird-getest-)
+      - [Benötigte Infrastruktur:](#benötigte-infrastruktur)
+      - [Testdaten](#testdaten)
+  - [Arbeitsjournal](#arbeitsjournal)
+    - [Arbeitsblock 1](#arbeitsblock-1)
+    - [Arbeitsblock 2](#arbeitsblock-2)
+    - [Arbeitsblock 3](#arbeitsblock-3)
+    - [Arbeitsblock 4](#arbeitsblock-4)
+    - [Arbeitsblock 5](#arbeitsblock-5)
+    - [Arbeitsblock 6](#arbeitsblock-6)
+    - [Arbeitsblock 7](#arbeitsblock-7)
+  - [Installationsanleitung](#installationsanleitung)
+    - [Voraussetzungen](#voraussetzungen)
+    - [Schritt 1: Projekt von Github auf lokalen Pc clonen](#schritt-1-projekt-von-github-auf-lokalen-pc-clonen)
+    - [Schritt 2: Mysql Datenbank Container starten](#schritt-2-mysql-datenbank-container-starten)
+    - [Schritt 3: Java Spring-boot Anwendung starten](#schritt-3-java-spring-boot-anwendung-starten)
+    - [Schritt 4: Insomnia einrichten](#schritt-4-insomnia-einrichten)
+  - [Hilfestellungen](#hilfestellungen)
+  - [Auswertung](#auswertung)
+  
 
 
 ## Aufgabestellung
@@ -46,15 +71,15 @@ Die Applikation soll einen von dir zu definierenden Prozess ermöglichen. Für d
 
 ## Arbeitsplan
 
-|Datum     |Dauer |Thema                                           |
-|----------|---------------------|------------------------------------------------|
-|31.10.2024|2h         | An einer Projektidee arbeiten + Github-Repository erstellen|
-|02.11.2024|2h         | Projektidee festlegen, User Stories erstellen|
-|03.11.2024|2h         | Grundgerüst Java Springboot und Datenbank Container erstellen|
-|04.11.2024|4h         | Klassen und Controller in Java erstellen, Http Requests mit Insomnia erstellen|
-|05.11.2024|4h         | Manuelle Test + JUnit Tests,
-|06.11.2024|4h         | Exceptions erstellen, Dokumentation starten
-|07.11.2024|7h         | Diverse Arbeiten, Dokumentation abschliessen
+| Datum      | Dauer | Thema                                                                          |
+| ---------- | ----- | ------------------------------------------------------------------------------ |
+| 31.10.2024 | 2h    | An einer Projektidee arbeiten + Github-Repository erstellen                    |
+| 02.11.2024 | 2h    | Projektidee festlegen, User Stories erstellen                                  |
+| 03.11.2024 | 2h    | Grundgerüst Java Springboot und Datenbank Container erstellen                  |
+| 04.11.2024 | 4h    | Klassen und Controller in Java erstellen, Http Requests mit Insomnia erstellen |
+| 05.11.2024 | 4h    | Manuelle Test + JUnit Tests,                                                   |
+| 06.11.2024 | 4h    | Exceptions erstellen, Dokumentation starten                                    |
+| 07.11.2024 | 7h    | Diverse Arbeiten, Dokumentation abschliessen                                   |
 
 
 ## Projektidee
@@ -161,117 +186,117 @@ Es wird 1 Akzeptanztest für jeden der oben aufgelisteten Punkte durchgeführt.
 <br>
  
  
-|Testplan für Test 1 |                 |
-|:-------------             |:--------------- |
-| ID / Bezeichnung          | T-01       |
-| Beschreibung              | Es wird eine neue Liga erstellt|
-| Testvoraussetzung         | - Die Java Springboot Applikation muss laufen. <br> - Insomnia muss eingerichtet sein|
-| Testschritte              | 1. Es wird ein Post request an die URL(localhost:8080/liga/) vorbereitet. <br> 2. Es wird ein Liga-Testobjekt in den RequestBody eingefügt. <br> 3. Der Post request wird abgesendet|
-| Erwartetes Testergebnis   | Das Liga-Testobjekt wird hinzugefügt.|
+| Testplan für Test 1     |                                                                                                                                                                                      |
+| :---------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ID / Bezeichnung        | T-01                                                                                                                                                                                 |
+| Beschreibung            | Es wird eine neue Liga erstellt                                                                                                                                                      |
+| Testvoraussetzung       | - Die Java Springboot Applikation muss laufen. <br> - Insomnia muss eingerichtet sein                                                                                                |
+| Testschritte            | 1. Es wird ein Post request an die URL(localhost:8080/liga/) vorbereitet. <br> 2. Es wird ein Liga-Testobjekt in den RequestBody eingefügt. <br> 3. Der Post request wird abgesendet |
+| Erwartetes Testergebnis | Das Liga-Testobjekt wird hinzugefügt.                                                                                                                                                |
  
  
  
-|Testprotokoll für Test 1 |                 |
-|:------------- |:--------------- |
-| Tester | Jan Helbling |            |
-| Testdatum | 05.11.24 |
-| Ergebnis | **Der Post request mit dem Liga-Testobjekt** ![](./Bilder/Testfall_1_before.png "Image") <br> <br>  **Resultat:** <br> Liga wurde hinzugefügt  ![](./Bilder/Testfall_1_after.png "Image")   |
-| Kommentar vom Tester |  Alles I.O
+| Testprotokoll für Test 1 |                                                                                                                                                                                           |
+| :----------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tester                   | Jan Helbling                                                                                                                                                                              |  |
+| Testdatum                | 05.11.24                                                                                                                                                                                  |
+| Ergebnis                 | **Der Post request mit dem Liga-Testobjekt** ![](./Bilder/Testfall_1_before.png "Image") <br> <br>  **Resultat:** <br> Liga wurde hinzugefügt  ![](./Bilder/Testfall_1_after.png "Image") |
+| Kommentar vom Tester     | Alles I.O                                                                                                                                                                                 |
 
 <br>
 
-|Testplan für Test 2 |                 |
-|:-------------             |:--------------- |
-| ID / Bezeichnung          | T-02       |
-| Beschreibung              | Es wird ein neues Team erstellt|
-| Testvoraussetzung         | - Die Java Springboot Applikation muss laufen. <br> - Insomnia muss eingerichtet sein|
-| Testschritte              | 1. Es wird ein Post request an die URL(localhost:8080/team/) vorbereitet. <br> 2. Es wird ein Team-Testobjekt in den RequestBody eingefügt. <br> 3. Der Post request wird abgesendet|
-| Erwartetes Testergebnis   | Das Team-Testobjekt wird hinzugefügt.|
+| Testplan für Test 2     |                                                                                                                                                                                      |
+| :---------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ID / Bezeichnung        | T-02                                                                                                                                                                                 |
+| Beschreibung            | Es wird ein neues Team erstellt                                                                                                                                                      |
+| Testvoraussetzung       | - Die Java Springboot Applikation muss laufen. <br> - Insomnia muss eingerichtet sein                                                                                                |
+| Testschritte            | 1. Es wird ein Post request an die URL(localhost:8080/team/) vorbereitet. <br> 2. Es wird ein Team-Testobjekt in den RequestBody eingefügt. <br> 3. Der Post request wird abgesendet |
+| Erwartetes Testergebnis | Das Team-Testobjekt wird hinzugefügt.                                                                                                                                                |
  
  
  
-|Testprotokoll für Test 2 |                 |
-|:------------- |:--------------- |
-| Tester | Jan Helbling |            |
-| Testdatum | 05.11.24 |
-| Ergebnis | **Der Post request mit dem Team-Testobjekt** ![](./Bilder/Testfall_2_before.png "Image") Die liga_id 3 = unsere Testobjekt liga <br> <br>  **Resultat:** <br> Team wurde hinzugefügt  ![](./Bilder/Testfall_2_after.png "Image")   |
-| Kommentar vom Tester |  Alles I.O
+| Testprotokoll für Test 2 |                                                                                                                                                                                                                                  |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tester                   | Jan Helbling                                                                                                                                                                                                                     |  |
+| Testdatum                | 05.11.24                                                                                                                                                                                                                         |
+| Ergebnis                 | **Der Post request mit dem Team-Testobjekt** ![](./Bilder/Testfall_2_before.png "Image") Die liga_id 3 = unsere Testobjekt liga <br> <br>  **Resultat:** <br> Team wurde hinzugefügt  ![](./Bilder/Testfall_2_after.png "Image") |
+| Kommentar vom Tester     | Alles I.O                                                                                                                                                                                                                        |
 
 <br>
 
-|Testplan für Test 3 |                 |
-|:-------------             |:--------------- |
-| ID / Bezeichnung          | T-03       |
-| Beschreibung              | Es wird ein neuer Spieler erstellt|
-| Testvoraussetzung         | - Die Java Springboot Applikation muss laufen. <br> - Insomnia muss eingerichtet sein|
-| Testschritte              | 1. Es wird ein Post request an die URL(localhost:8080/spieler/) vorbereitet. <br> 2. Es wird ein Spieler-Testobjekt in den RequestBody eingefügt. <br> 3. Der Post request wird abgesendet|
-| Erwartetes Testergebnis   | Das Spieler-Testobjekt wird hinzugefügt.|
+| Testplan für Test 3     |                                                                                                                                                                                            |
+| :---------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ID / Bezeichnung        | T-03                                                                                                                                                                                       |
+| Beschreibung            | Es wird ein neuer Spieler erstellt                                                                                                                                                         |
+| Testvoraussetzung       | - Die Java Springboot Applikation muss laufen. <br> - Insomnia muss eingerichtet sein                                                                                                      |
+| Testschritte            | 1. Es wird ein Post request an die URL(localhost:8080/spieler/) vorbereitet. <br> 2. Es wird ein Spieler-Testobjekt in den RequestBody eingefügt. <br> 3. Der Post request wird abgesendet |
+| Erwartetes Testergebnis | Das Spieler-Testobjekt wird hinzugefügt.                                                                                                                                                   |
  
  
  
-|Testprotokoll für Test 3 |                 |
-|:------------- |:--------------- |
-| Tester | Jan Helbling |            |
-| Testdatum | 05.11.24 |
-| Ergebnis | **Der Post request mit dem Team-Testobjekt** ![](./Bilder/Testfall_3_before.png "Image") Die team_id 8 = unser Testobjekt team <br> <br>  **Resultat:** <br> Team wurde hinzugefügt  ![](./Bilder/Testfall_3_after.png "Image")   |
-| Kommentar vom Tester |  Alles I.O
+| Testprotokoll für Test 3 |                                                                                                                                                                                                                                 |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Tester                   | Jan Helbling                                                                                                                                                                                                                    |  |
+| Testdatum                | 05.11.24                                                                                                                                                                                                                        |
+| Ergebnis                 | **Der Post request mit dem Team-Testobjekt** ![](./Bilder/Testfall_3_before.png "Image") Die team_id 8 = unser Testobjekt team <br> <br>  **Resultat:** <br> Team wurde hinzugefügt  ![](./Bilder/Testfall_3_after.png "Image") |
+| Kommentar vom Tester     | Alles I.O                                                                                                                                                                                                                       |
 
 <br>
 
-|Testplan für Test 4 |                 |
-|:-------------             |:--------------- |
-| ID / Bezeichnung          | T-04       |
-| Beschreibung              | Es wird versucht ein Spieler zu erstellen der 17 Jahre alt ist|
-| Testvoraussetzung         | - Die Java Springboot Applikation muss laufen. <br> - Insomnia muss eingerichtet sein|
-| Testschritte              | 1. Es wird ein Post request an die URL(localhost:8080/spieler/) vorbereitet. <br> 2. Es wird ein Spieler-Testobjekt mit dem attribut age = 17 in den RequestBody eingefügt. <br> 3. Der Post request wird abgesendet|
-| Erwartetes Testergebnis   | Der Spieler wird nicht hinzugefügt weil das Alter mindestens 18 sein muss.|
+| Testplan für Test 4     |                                                                                                                                                                                                                      |
+| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ID / Bezeichnung        | T-04                                                                                                                                                                                                                 |
+| Beschreibung            | Es wird versucht ein Spieler zu erstellen der 17 Jahre alt ist                                                                                                                                                       |
+| Testvoraussetzung       | - Die Java Springboot Applikation muss laufen. <br> - Insomnia muss eingerichtet sein                                                                                                                                |
+| Testschritte            | 1. Es wird ein Post request an die URL(localhost:8080/spieler/) vorbereitet. <br> 2. Es wird ein Spieler-Testobjekt mit dem attribut age = 17 in den RequestBody eingefügt. <br> 3. Der Post request wird abgesendet |
+| Erwartetes Testergebnis | Der Spieler wird nicht hinzugefügt weil das Alter mindestens 18 sein muss.                                                                                                                                           |
  
  
  
-|Testprotokoll für Test 4 |                 |
-|:------------- |:--------------- |
-| Tester | Jan Helbling |            |
-| Testdatum | 05.11.24 |
-| Ergebnis | **Der Post request mit dem Team-Testobjekt** ![](./Bilder/Testfall_4_before.png "Image") <br> <br>  **Resultat:** <br> 400 Error, Bad Request ![](./Bilder/Testfall_4_after.png "Image") <br> Screenshot aus dem Java Springboot Kommandozeile <br> ![](./Bilder/Testfall_4_after_console.png "Image")|
-| Kommentar vom Tester |  Alles I.O
+| Testprotokoll für Test 4 |                                                                                                                                                                                                                                                                                                        |
+| :----------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tester                   | Jan Helbling                                                                                                                                                                                                                                                                                           |  |
+| Testdatum                | 05.11.24                                                                                                                                                                                                                                                                                               |
+| Ergebnis                 | **Der Post request mit dem Team-Testobjekt** ![](./Bilder/Testfall_4_before.png "Image") <br> <br>  **Resultat:** <br> 400 Error, Bad Request ![](./Bilder/Testfall_4_after.png "Image") <br> Screenshot aus dem Java Springboot Kommandozeile <br> ![](./Bilder/Testfall_4_after_console.png "Image") |
+| Kommentar vom Tester     | Alles I.O                                                                                                                                                                                                                                                                                              |
 
 <br>
 
-|Testplan für Test 5 |                 |
-|:-------------             |:--------------- |
-| ID / Bezeichnung          | T-05       |
-| Beschreibung              | Es wird versucht ein Team zu erstellen, das einen zu langen Namen hat(mehr als 20 Character).|
-| Testvoraussetzung         | - Die Java Springboot Applikation muss laufen. <br> - Insomnia muss eingerichtet sein|
-| Testschritte              | 1. Es wird ein Post request an die URL(localhost:8080/team/) vorbereitet. <br> 2. Es wird ein Team-Testobjekt in den RequestBody eingefügt. <br> 3. Der Post request wird abgesendet|
-| Erwartetes Testergebnis   | Das Team wird nicht hinzugefügt weil der Name zu lang ist.|
+| Testplan für Test 5     |                                                                                                                                                                                      |
+| :---------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ID / Bezeichnung        | T-05                                                                                                                                                                                 |
+| Beschreibung            | Es wird versucht ein Team zu erstellen, das einen zu langen Namen hat(mehr als 20 Character).                                                                                        |
+| Testvoraussetzung       | - Die Java Springboot Applikation muss laufen. <br> - Insomnia muss eingerichtet sein                                                                                                |
+| Testschritte            | 1. Es wird ein Post request an die URL(localhost:8080/team/) vorbereitet. <br> 2. Es wird ein Team-Testobjekt in den RequestBody eingefügt. <br> 3. Der Post request wird abgesendet |
+| Erwartetes Testergebnis | Das Team wird nicht hinzugefügt weil der Name zu lang ist.                                                                                                                           |
  
  
  
-|Testprotokoll für Test 5 |                 |
-|:------------- |:--------------- |
-| Tester | Jan Helbling |            |
-| Testdatum | 05.11.24 |
-| Ergebnis | **Der Post request mit dem Team-Testobjekt** ![](./Bilder/Testfall_5_before.png "Image") <br> <br>  **Resultat:** <br> 400 Error, Bad Request ![](./Bilder/Testfall_5_after.png "Image") <br> Screenshot aus dem Java Springboot Kommandozeile <br> ![](./Bilder/Testfall_5_after_console.png "Image")|
-| Kommentar vom Tester |  Alles I.O
+| Testprotokoll für Test 5 |                                                                                                                                                                                                                                                                                                        |
+| :----------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tester                   | Jan Helbling                                                                                                                                                                                                                                                                                           |  |
+| Testdatum                | 05.11.24                                                                                                                                                                                                                                                                                               |
+| Ergebnis                 | **Der Post request mit dem Team-Testobjekt** ![](./Bilder/Testfall_5_before.png "Image") <br> <br>  **Resultat:** <br> 400 Error, Bad Request ![](./Bilder/Testfall_5_after.png "Image") <br> Screenshot aus dem Java Springboot Kommandozeile <br> ![](./Bilder/Testfall_5_after_console.png "Image") |
+| Kommentar vom Tester     | Alles I.O                                                                                                                                                                                                                                                                                              |
 
 <br>
 
-|Testplan für Test 6 |                 |
-|:-------------             |:--------------- |
-| ID / Bezeichnung          | T-06       |
-| Beschreibung              | Es wird versucht ein Team zu erstellen, dass eine ungültigen liga_id hat.|
-| Testvoraussetzung         | - Die Java Springboot Applikation muss laufen. <br> - Insomnia muss eingerichtet sein|
-| Testschritte              | 1. Es wird ein Post request an die URL(localhost:8080/team/) vorbereitet. <br> 2. Es wird ein Team-Testobjekt in den RequestBody eingefügt. <br> 3. Der Post request wird abgesendet|
-| Erwartetes Testergebnis   | Das Team wird nicht hinzugefügt weil die liga_id ungültig ist.|
+| Testplan für Test 6     |                                                                                                                                                                                      |
+| :---------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ID / Bezeichnung        | T-06                                                                                                                                                                                 |
+| Beschreibung            | Es wird versucht ein Team zu erstellen, dass eine ungültigen liga_id hat.                                                                                                            |
+| Testvoraussetzung       | - Die Java Springboot Applikation muss laufen. <br> - Insomnia muss eingerichtet sein                                                                                                |
+| Testschritte            | 1. Es wird ein Post request an die URL(localhost:8080/team/) vorbereitet. <br> 2. Es wird ein Team-Testobjekt in den RequestBody eingefügt. <br> 3. Der Post request wird abgesendet |
+| Erwartetes Testergebnis | Das Team wird nicht hinzugefügt weil die liga_id ungültig ist.                                                                                                                       |
  
  
  
-|Testprotokoll für Test 6 |                 |
-|:------------- |:--------------- |
-| Tester | Jan Helbling |            |
-| Testdatum | 05.11.24 |
-| Ergebnis | **Der Post request mit dem Team-Testobjekt** ![](./Bilder/Testfall_6_before.png "Image") <br> <br>  **Resultat:** <br> 500 Error, Internal Server Error ![](./Bilder/Testfall_6_after.png "Image")|
-| Kommentar vom Tester |  Alles I.O
+| Testprotokoll für Test 6 |                                                                                                                                                                                                    |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tester                   | Jan Helbling                                                                                                                                                                                       |  |
+| Testdatum                | 05.11.24                                                                                                                                                                                           |
+| Ergebnis                 | **Der Post request mit dem Team-Testobjekt** ![](./Bilder/Testfall_6_before.png "Image") <br> <br>  **Resultat:** <br> 500 Error, Internal Server Error ![](./Bilder/Testfall_6_after.png "Image") |
+| Kommentar vom Tester     | Alles I.O                                                                                                                                                                                          |
 
 
 ## Arbeitsjournal
@@ -433,15 +458,15 @@ Optional, falls nicht bereits installiert:
 
 ## Hilfestellungen
 
-|||
-|:------------- |:--------------- |
-| Erstellen des docker-comopose file | Fabian Wehrle|
-| Erstellen des Java Springboot Boilerplate| Unterlagen von Modul 295|
-| Verbindung zwischen Java Springboot und Mysql Datenbank erstellen| Fabian Wehrle|
-| Unterstützung beim Erstellen von meinen Controller Klassen| Chat GPT|
-|Hilfe bei der Fehlersuche von meinen Http-Requests| Sven Schirmer |
-| Unterstützung beim Erstellen von meinen Unit Tests| Unterlagen aus dem Modul 295 <br> ChatGPT|
-| Unterstützung beim Erstellen von meinen Exceptions| Unterlagen aus dem Modul 295 <br> ChatGPT|
+|                                                                   |                                           |
+| :---------------------------------------------------------------- | :---------------------------------------- |
+| Erstellen des docker-comopose file                                | Fabian Wehrle                             |
+| Erstellen des Java Springboot Boilerplate                         | Unterlagen von Modul 295                  |
+| Verbindung zwischen Java Springboot und Mysql Datenbank erstellen | Fabian Wehrle                             |
+| Unterstützung beim Erstellen von meinen Controller Klassen        | Chat GPT                                  |
+| Hilfe bei der Fehlersuche von meinen Http-Requests                | Sven Schirmer                             |
+| Unterstützung beim Erstellen von meinen Unit Tests                | Unterlagen aus dem Modul 295 <br> ChatGPT |
+| Unterstützung beim Erstellen von meinen Exceptions                | Unterlagen aus dem Modul 295 <br> ChatGPT |
 
 
 ## Auswertung
