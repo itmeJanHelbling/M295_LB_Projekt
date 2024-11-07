@@ -55,7 +55,7 @@ class LigaControllerTest {
     }
 
     // Test 1
-    // Testet die PostRequest von einem gültigen Liga Objekt und gibt uns einen 200
+    // Testet denn PostRequest von einem gültigen Liga Objekt und gibt uns einen 200
     // Status Successful
     @Test
     void testCorrectPostRequest_ReturnsOk() throws Exception {

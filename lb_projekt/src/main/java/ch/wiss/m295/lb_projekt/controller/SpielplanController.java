@@ -1,6 +1,9 @@
 package ch.wiss.m295.lb_projekt.controller;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,6 +36,9 @@ public class SpielplanController {
         List<Team> teams = teamRepository.findAllByLigaId(ligaId);
         List<Map<String, Object>> spiele = new ArrayList<>();
 
+        // Startzeitpunkt für das erste Spiel (nächster Samstag um 16:00)
+        LocalDateTime spielDatum = getNextSaturdayAt16();
+
         // Erstellen des Spielplans
         for (int i = 0; i < teams.size(); i++) {
             for (int j = i + 1; j < teams.size(); j++) {
@@ -40,9 +46,12 @@ public class SpielplanController {
                 spiel.put("team1", teams.get(i).getName());
                 spiel.put("team2", teams.get(j).getName());
                 spiel.put("austragungsort", getRandomAustragungsort(teams.get(i), teams.get(j)));
-                spiel.put("datum", getRandomDatum());
+                spiel.put("datum", spielDatum);
 
                 spiele.add(spiel);
+
+                // Nächstes Spiel eine Woche später (Samstag um 16:00)
+                spielDatum = spielDatum.plusWeeks(1);
             }
         }
 
@@ -59,8 +68,15 @@ public class SpielplanController {
         return austragungsorte.get(0); // return a random team stadium
     }
 
-    private LocalDateTime getRandomDatum() {
+    private LocalDateTime getNextSaturdayAt16() {
         LocalDateTime now = LocalDateTime.now();
-        return now.plusDays((long) (Math.random() * 30));
+
+        // Falls heute Samstag ist und es nach 16 Uhr, wähle den nächsten Samstag
+        if (now.getDayOfWeek() == DayOfWeek.SATURDAY && now.toLocalTime().isAfter(LocalTime.of(16, 0))) {
+            now = now.plusDays(1);
+        }
+        // Finde den nächsten Samstag und setze die Uhrzeit auf 16:00
+        return now.with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY))
+                .with(LocalTime.of(16, 0));
     }
 }
