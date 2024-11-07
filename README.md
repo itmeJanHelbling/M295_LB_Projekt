@@ -1,5 +1,18 @@
 # M295_LB_Projekt
 
+## Inhaltsverzeichnis
+
+- [Aufgabenstellung](#aufgabenstellung)
+- [Arbeitsplan](#arbeitsplan)
+- [Projektidee](#projektidee)
+- [User Stories](#user-stories)
+- [Klassendiagramm](#klassendiagramm)
+- [Rest Endpunkte](#rest-endpunkte)
+- [Manuelles Testing](#manuelles-testing)
+- [Arbeitsjournal](#arbeitsjournal)
+- [Installationsanleitung](#installationsanleitung)
+- [Hilfestellungen](#hilfestellungen)
+- [Auswertung](#auswertung)
 
 
 ## Aufgabestellung
