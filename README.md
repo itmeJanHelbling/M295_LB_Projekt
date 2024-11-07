@@ -4,9 +4,11 @@
 
 - [M295\_LB\_Projekt](#m295_lb_projekt)
   - [Inhaltsverzeichnis](#inhaltsverzeichnis)
-  - [Aufgabestellung](#aufgabestellung)
+  - [Informieren](#informieren)
+    - [Aufgabestellung](#aufgabestellung)
     - [Was brauche ich?](#was-brauche-ich)
-  - [Arbeitsplan](#arbeitsplan)
+  - [Planen](#planen)
+    - [Arbeitsplan](#arbeitsplan)
   - [Projektidee](#projektidee)
   - [User Stories](#user-stories)
     - [User Story 1](#user-story-1)
@@ -39,9 +41,9 @@
   - [Auswertung](#auswertung)
     - [Reflexion](#reflexion)
   
+## Informieren
 
-
-## Aufgabestellung
+### Aufgabestellung
 
 Die Applikation soll einen von dir zu definierenden Prozess ermöglichen. Für die Daten einer relationalen Datenbank sollen CRUD-Operationen in einer REST-API zur Verfügung gestellt werden.
 
@@ -70,7 +72,9 @@ Die Applikation soll einen von dir zu definierenden Prozess ermöglichen. Für d
 
 <br>
 
-## Arbeitsplan
+## Planen
+
+### Arbeitsplan
 
 | Datum      | Dauer | Thema                                                                          |
 | ---------- | ----- | ------------------------------------------------------------------------------ |
@@ -88,6 +92,7 @@ Die Applikation soll einen von dir zu definierenden Prozess ermöglichen. Für d
 Meine Anwendung soll Daten zu einer Sportliga (online oder offline) speichern und zusätzlich die Möglichkeit bieten, automatisch einen Spielplan für diese Liga zu erstellen. Eine Sportliga besteht aus mehreren Teams, und jedes Team hat mehrere Spieler.
 
 Nachdem alle Spieler ihren Teams zugeordnet wurden und alle Teams einer Liga angehören, kann ein vollständiger Spielplan für die ausgewählte Liga generiert werden. In diesem Plan tritt jedes Team einmal gegen jedes andere Team an. Die Matches finden jeweils in einem Stadion eines der beiden beteiligten Teams statt, und es wird automatisch ein passendes Datum für jedes Spiel festgelegt.
+
 
 ## User Stories
 
@@ -133,7 +138,7 @@ Als Nutzer muss ich Spieler für meine Teams erstellen, bearbeiten und löschen 
 ### User Story 4
 **Spielplan Generator**
 
-Als Nutzer möchte ich für eine Liga einen Spielplan generieren, sodass jedes Team einmal gegen jedes andere Team spielt.
+Als Nutzer muss ich für eine Liga einen Spielplan generieren können um die Durchführung einer Ligaphase oder eines Turniers zu gewährleisten.
 
 **Akzeptanzkriterien**
 
