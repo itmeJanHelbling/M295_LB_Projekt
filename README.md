@@ -455,6 +455,10 @@ Optional, falls nicht bereits installiert:
 3. Die Datei "M295_LB_Projekt_Insomnia" aus dem Projektordner auswählen 
 4. Import abschliessen
 5. Jetzt sollten alle Http-Requests vorhanden sein.
+   
+**Kommentar zum erstellen eines Spielplan**
+
+Wenn man einen Spielplan erstellen möchte, muss zunächst eine Liga erstellt werden. Danach kann man Teams zu dieser Liga hinzufügen. Ich würde vorschlagen 5 Teams zu erstellen. Damit es mehrere Matches gibt.
 
 
 ## Hilfestellungen
