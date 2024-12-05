@@ -28,14 +28,14 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Test
-      run: mvn -f backend/ --batch-mode -Dmaven.test.failure.ignore=true test
+      run: mvn -f lb_projekt/ --batch-mode -Dmaven.test.failure.ignore=true test
       
     - name: Report
       uses: dorny/test-reporter@v1
       if: always()
       with:
        name: Maven Tests
-       path: backend/target/surefire-reports/*.xml
+       path: lb_projekt/target/surefire-reports/*.xml
        reporter: java-junit
        fail-on-error: true
 
